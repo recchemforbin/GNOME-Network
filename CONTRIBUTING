@@ -1,0 +1,22 @@
+# Join GNOME Network
+
+## Build your node
+1. Follow README wiring instructions
+2. Upload Arduino code
+3. Test in Serial Monitor
+4. See hits logging correctly
+
+## Register
+1. Open Issue using Node Registration template
+2. GitHub Action assigns your NODE_ID automatically
+3. Update NODE_ID in your Arduino code
+4. Start contributing data!
+
+## Data quality
+- Wrap LED in 6+ layers electrical tape
+- Keep away from USB cable during detection
+- Let calibrate fully before moving detector
+- Run at least 1 hour sessions
+
+## License
+All contributions CC BY 4.0
