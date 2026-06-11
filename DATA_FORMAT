@@ -1,0 +1,28 @@
+# GNOME Data Format v1.0
+
+## Hit Data
+| Field | Type | Description |
+|-------|------|-------------|
+| timestamp | integer | Milliseconds since Arduino boot |
+| hit_number | integer | Sequential hit counter |
+| spike | integer | Signal strength above baseline |
+| baseline | integer | Calibrated baseline value |
+| latitude | float | Node latitude |
+| longitude | float | Node longitude |
+| elevation | integer | Meters above sea level |
+| node_id | string | Unique node identifier |
+| hit_type | string | stored or live |
+
+## Node Data
+| Field | Type | Description |
+|-------|------|-------------|
+| date_joined | date | Registration date |
+| node_id | string | Assigned ID |
+| username | string | GitHub username |
+| country | string | Country |
+| arduino | string | Board type |
+| led_color | string | Detector LED color |
+| status | string | ACTIVE or INACTIVE |
+
+## Data License
+CC BY 4.0
