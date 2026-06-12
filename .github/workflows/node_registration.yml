@@ -1,0 +1,52 @@
+name: Auto Node Registration
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  register:
+    if: contains(github.event.issue.title, 'New Node')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign Node ID
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'node-registration',
+              state: 'all'
+            });
+            
+            const num = issues.data.length + 1;
+            const nodeId = `GNOME-${String(num).padStart(3, '0')}`;
+            
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## Welcome to GNOME! 🌌
+
+**Your Node ID: ${nodeId}**
+
+### Next steps:
+1. Open gnome_detector.ino
+2. Change NODE_ID to \`"${nodeId}"\`
+3. Upload to Arduino
+4. Run gnome_logger.py
+5. Start detecting!
+
+Thank you for contributing to citizen science!
+Every hit brings us closer to understanding dark matter.
+
+*Automated message from GNOME Network*`
+            });
+            
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['node-registration', 'node-confirmed']
+            });
