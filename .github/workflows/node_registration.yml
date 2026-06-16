@@ -19,31 +19,29 @@ jobs:
               labels: 'node-registration',
               state: 'all'
             });
-            
+
             const num = issues.data.length + 1;
-            const nodeId = `GNOME-${String(num).padStart(3, '0')}`;
-            
+            const nodeId = 'GNOME-' + String(num).padStart(3, '0');
+
+            const body = '## Welcome to GNOME! 🌌\n\n' +
+              '**Your Node ID: ' + nodeId + '**\n\n' +
+              '### Next steps:\n' +
+              '1. Open gnome_detector.ino\n' +
+              '2. Change NODE_ID to `"' + nodeId + '"`\n' +
+              '3. Upload to Arduino\n' +
+              '4. Run gnome_logger.py\n' +
+              '5. Start detecting!\n\n' +
+              'Thank you for contributing to citizen science!\n' +
+              'Every hit brings us closer to understanding dark matter.\n\n' +
+              '*Automated message from GNOME Network*';
+
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `## Welcome to GNOME! 🌌
-
-**Your Node ID: ${nodeId}**
-
-### Next steps:
-1. Open gnome_detector.ino
-2. Change NODE_ID to \`"${nodeId}"\`
-3. Upload to Arduino
-4. Run gnome_logger.py
-5. Start detecting!
-
-Thank you for contributing to citizen science!
-Every hit brings us closer to understanding dark matter.
-
-*Automated message from GNOME Network*`
+              body: body
             });
-            
+
             await github.rest.issues.addLabels({
               owner: context.repo.owner,
               repo: context.repo.repo,
